@@ -88,8 +88,8 @@ def process(metadata, input_filename, var_name, var_long, var_units):
         metadata['variables']['lat'] = {
             'long_name': 'Latitude',
             'units': 'degrees_north',
-            'valid_min': ll[0],
-            'valid_max': ur[0],
+            'valid_min': ll[1],
+            'valid_max': ur[1],
             '__size': [
                 ncols
             ]
@@ -195,6 +195,9 @@ try:
 
     coordinates_to_csv(metadata['variables']['lat'], output_pathname_arg + '.lat.csv')
     coordinates_to_csv(metadata['variables']['lon'], output_pathname_arg + '.lon.csv')
+
+    metadata['data']['lat'] = output_pathname_arg + '.lat.csv'
+    metadata['data']['lon'] = output_pathname_arg + '.lon.csv'
 
     with open(output_pathname_arg+'.json', "w") as f:
         f.write(json.dumps(json_data, indent=4))
