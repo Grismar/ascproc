@@ -3,7 +3,7 @@
     "global_attributes": {
         "title": "Rainfall radar categories Grafton",
         "radar": "Grafton",
-        "radar_id": 76,
+        "radar_id": 28,
         "radar_latitude": -29.620691,
         "radar_longitude": 152.963345,
         "data_projection": "GDA94 / MGA zone 56",

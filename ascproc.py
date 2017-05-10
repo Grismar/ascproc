@@ -12,6 +12,7 @@ import json
 import pyproj
 import csv
 import time
+from dateutil import parser as date_parser
 
 
 # set up argument parser
@@ -20,8 +21,11 @@ argparser.add_argument('input', nargs=1,
                        help='.asc input file.')
 argparser.add_argument('-o', '--out_file', default='',
                        help='Write output to a specific file (same as input by default, + .json and .csv).')
-argparser.add_argument('-ut', '--unix_time', default='',
+group = argparser.add_mutually_exclusive_group()
+group.add_argument('-ut', '--unix_time', default='',
                        help='UNIX Time to use for a timestamp (default = now).')
+group.add_argument('-t', '--iso_time', default='',
+                       help='ISO Time to use for a timestamp (default = now).')
 argparser.add_argument('-m', '--metadata', default='',
                        help='Seed the metadata with a source file.')
 argparser.add_argument('-l', '--log_level', type=int, default=1, choices=range(1, 5), metavar="[1-5]",
@@ -163,7 +167,10 @@ try:
         }
 
     if args.unix_time == '':
-        timestamp = int(time.time())
+        if args.iso_time == '':
+            timestamp = int(time.time())
+        else:
+            timestamp = time.mktime(date_parser.parse(args.iso_time).timetuple())
     else:
         timestamp = int(args.unix_time)
 
