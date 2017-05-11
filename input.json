@@ -1,18 +1,16 @@
 {
     "subgroups": {},
     "global_attributes": {
-        "title": "Rainfall radar categories Mt.Stapylton",
-        "radar": "Mt.Stapylton",
-        "radar_id": 66,
-        "radar_latitude": -27.718000,
-        "radar_longitude": 153.240000,
+        "title": "Forecast rainfall",
+        "radar": "Northern Rivers Forecast output",
+        "radar_id": "northern-rivers:forecast:1",
         "data_projection": "GDA94 / MGA zone 56",
-        "data_epsg": "28356"
+        "data_epsg": "3857"
     },
     "variables": {
         "category": {
-            "long_name": "Rainfall category",
-            "units": "index"
+            "long_name": "Forecast precipitation",
+            "units": "mm"
         }
     }
 }

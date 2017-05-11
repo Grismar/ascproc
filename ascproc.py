@@ -38,6 +38,8 @@ argparser.add_argument('-dl', '--data_long', default='data',
                        help='Specify a long (display) name for the data variable other than the default \'data\'.')
 argparser.add_argument('-du', '--data_units', default='units',
                        help='Specify units for the data variable other than the default \'unknown\'.')
+argparser.add_argument('-fp', '--full_path', action='store_true', default=False,
+                       help='Instead of just referencing the file names, reference full paths in the output json.')
 
 # parse argument for file names and log level
 args = argparser.parse_args(sys.argv[1:])
@@ -180,7 +182,10 @@ try:
         metadata['data'] = {}
     metadata['data']['start_time'] = timestamp
     metadata['data']['valid_time'] = timestamp
-    metadata['data'][args.data_name] = output_pathname_arg + '.csv'
+    if args.full_path:
+        metadata['data'][args.data_name] = output_pathname_arg + '.csv'
+    else:
+        metadata['data'][args.data_name] = os.path.basename(output_pathname_arg) + '.csv'
 
     def coordinates_to_csv(var, name):
         values = []
@@ -196,8 +201,12 @@ try:
     coordinates_to_csv(metadata['variables']['lat'], output_pathname_arg + '.lat.csv')
     coordinates_to_csv(metadata['variables']['lon'], output_pathname_arg + '.lon.csv')
 
-    metadata['data']['lat'] = output_pathname_arg + '.lat.csv'
-    metadata['data']['lon'] = output_pathname_arg + '.lon.csv'
+    if args.full_path:
+        metadata['data']['lat'] = output_pathname_arg + '.lat.csv'
+        metadata['data']['lon'] = output_pathname_arg + '.lon.csv'
+    else:
+        metadata['data']['lat'] = os.path.basename(output_pathname_arg) + '.lat.csv'
+        metadata['data']['lon'] = os.path.basename(output_pathname_arg) + '.lon.csv'
 
     with open(output_pathname_arg+'.json', "w") as f:
         f.write(json.dumps(json_data, indent=4))
