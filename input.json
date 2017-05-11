@@ -3,9 +3,7 @@
     "global_attributes": {
         "title": "Forecast rainfall",
         "radar": "Northern Rivers Forecast output",
-        "radar_id": "northern-rivers:forecast:1",
-        "data_projection": "GDA94 / MGA zone 56",
-        "data_epsg": "3857"
+        "radar_id": "northern-rivers:forecast:1"
     },
     "variables": {
         "category": {

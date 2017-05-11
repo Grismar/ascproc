@@ -1,0 +1,14 @@
+{
+    "subgroups": {},
+    "global_attributes": {
+        "title": "Forecast rainfall (acc.)",
+        "radar": "Northern Rivers Forecast output (acc.)",
+        "radar_id": "northern-rivers:forecast:2"
+    },
+    "variables": {
+        "category": {
+            "long_name": "Forecast precipitation (acc.)",
+            "units": "mm"
+        }
+    }
+}
